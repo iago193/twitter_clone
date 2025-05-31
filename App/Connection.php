@@ -8,7 +8,7 @@
     class Connection {
 
         private $host = 'localhost';
-        private $dataBase = 'mvc';
+        private $dataBase = 'twitter_clone';
         private $user = 'root';
         private $senha = '';
 
