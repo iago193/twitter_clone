@@ -1,19 +1,18 @@
 <?php
 
-    namespace MF\Model;
-    
-    use App\Connection;
+namespace MF\Model;
 
-    class Container {
+use App\Connection;
 
-        public static function getModel($model) {
+class Container {
 
-            $class = "\\App\\Models\\".ucfirst($model);
-            $conn = Connection::getDb();
+	public static function getModel($model) {
+		$class = "\\App\\Models\\".ucfirst($model);
+		$conn = Connection::getDb();
 
-            return new $class($conn);
+		return new $class($conn);
+	}
+}
 
-        }
-    }
 
 ?>

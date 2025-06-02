@@ -22,10 +22,10 @@
 
         public function salvar() {
             $query = "INSERT INTO usuarios(nome, email, senha)VALUES(:nome, :email, :senha)";
-            $smtmt = $this->db->prepare($query);
-            $smtmt->bindValue(':nome', $this->__get('nome'));
-            $smtmt->bindValue(':email', $this->__get('email'));
-            $smtmt->bindValue(':senha', $this->__get('senha')); //md5() -> hash de 32 caracteres
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':nome', $this->__get('nome'));
+            $stmt->bindValue(':email', $this->__get('email'));
+            $stmt->bindValue(':senha', $this->__get('senha')); //md5() -> hash de 32 caracteres
             $stmt->execute();
 
             return $this;
