@@ -14,12 +14,17 @@
         }
 
         public function inscreverse() {
+            $this->view->usuario = [
+                'nome' => '',
+                'email' => '',
+                'senha' => ''
+            ];
+
+            $this->view->erroCadastro = false;
             $this->render('inscreverse', 'layout');
         }
 
         public function registrar() {
-
-            //receber os dados so formulário
 
             $usuario = Container::getModel('Usuario');
 
@@ -27,11 +32,21 @@
             $usuario->__set('email', $_POST['email']);
             $usuario->__set('senha', $_POST['senha']);
 
-            $usuario->salvar();
-            //sucesso
+            if($usuario->validarCadastro() && empty($usuario->getUsuarioPorEmail())) {
 
+                $usuario->salvar();
+                $this->render('Cadastro');
+                
+            } else {
+                $this->view->usuario = [
+                    'nome' => $_POST['nome'],
+                    'email' => $_POST['email'],
+                    'senha' => $_POST['senha']
+                ];
 
-            //erro
+                $this->view->erroCadastro = true;
+                $this->render('inscreverse');
+            }
         }
     }
 ?>

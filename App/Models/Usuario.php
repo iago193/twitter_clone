@@ -18,7 +18,7 @@
             $this->$atributo = $valor;
         }
 
-        //salvar
+        //salvar cadastro
 
         public function salvar() {
             $query = "INSERT INTO usuarios(nome, email, senha)VALUES(:nome, :email, :senha)";
@@ -33,7 +33,26 @@
 
         //validar se um cadastro pode ser feito
 
+        public function validarCadastro() {
+
+            $nomeValido  = strlen($this->__get('nome')) >= 3;
+            $emailValido = strlen($this->__get('email')) >= 3;
+            $senhaValida = strlen($this->__get('senha')) >= 3;
+
+            return $nomeValido && $emailValido && $senhaValida;
+
+        }
+
         //recuperar um usuário por e-mail
+
+        public function getUsuarioPorEmail() {
+            $query = 'SELECT nome, email FROM usuarios WHERE email = :email';
+            $stmt = $this->db->prepare($query);
+            $stmt->bindValue(':email', $this->__get('email'));
+            $stmt->execute();
+
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
 
     }
 
