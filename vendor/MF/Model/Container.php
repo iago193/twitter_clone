@@ -9,7 +9,7 @@
         public static function getModel($model) {
 
             $class = "\\App\\Models\\".ucfirst($model);
-            $conn = (new Connection())->getDb();
+            $conn = Connection::getDb();
 
             return new $class($conn);
 
