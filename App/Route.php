@@ -56,6 +56,12 @@ class Route extends Bootstrap {
             'action' => 'quemSequir'
         ];
 
+        $routes['acao'] = [
+            'route' => '/acao',
+            'controller' => 'AppController',
+            'action' => 'acao'
+        ];
+
         $this->setRoutes($routes);
     }
 }
