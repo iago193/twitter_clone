@@ -94,6 +94,16 @@
             header('Location: /quem_sequir');
         }
 
+        public function remover_tweet() {
+
+            $tweet_remover = Container::getModel('Tweet');
+            $tweet_remover->__set('id', $_POST['id']);
+            $tweet_remover->remover();
+
+            header('Location: /timeline');
+
+        }
+
     }
 
 ?>
