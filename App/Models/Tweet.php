@@ -47,6 +47,8 @@
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         }
 
+        //remover tweets
+
         public function remover() {
             $query = "DELETE FROM tweets WHERE id = :id";
             $stmt = $this->db->prepare($query);
