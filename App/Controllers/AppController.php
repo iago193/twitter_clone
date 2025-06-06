@@ -14,12 +14,23 @@
             $this->validaAutenticacao();
         
                 //recuperar tweets
-
                 $tweet = Container::getModel('Tweet');
-
                 $tweet->__set('id_usuario', $_SESSION['id']);
-                $tweets = $tweet->getAll();
 
+                //variaveis de páginação
+                $total_registros_pagina = 10; //limit
+                $pagina = isset($_GET['pagina']) && is_numeric($_GET['pagina']) ? (int) $_GET['pagina'] : 1;
+                $pagina = max($pagina, 1); // garante que não seja menor que 1
+                $deslocamento = ($pagina - 1) * $total_registros_pagina; //offset
+
+
+                //$tweets = $tweet->getAll();
+                $tweets = $tweet->getPorPagina($total_registros_pagina, $deslocamento);
+                $total_tweets = $tweet->getTotalRegistros();
+
+                $this->view->total_de_paginas = ceil($total_tweets['total'] / $total_registros_pagina);
+                $this->view->pagina_ativa = $pagina;
+                
                 $this->view->tweets = $tweets;
 
                 $usuario = Container::getModel('Usuario');
